@@ -6,7 +6,9 @@ The goal of the game is to win the Super Bowl, which in American football occurs
 When you are done playing at the end of a season, type "STOP" and you will see a small credits paragraph as well as a table showing your results, season by season. The table will also have some session-long results at the end, including total wins and losses, playoff appearances, Super Bowl wins, and more.
 
 CHANGELOG:
+
 v1.0: Initial launch
+
 v1.1 Added player aging and developing, made it so that as players age to their prime, they increase a random amount of ovr. After their prime and as they get older, they lose a random amount of ovr. These amounts ramp up depending on how close/far they are from their prime. 
 
 
