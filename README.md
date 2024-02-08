@@ -12,5 +12,7 @@ v1.0: Initial launch
 v1.1 Added player aging and developing, made it so that as players age to their prime, they increase a random amount of ovr. After their prime and as they get older, they lose a random amount of ovr. These amounts ramp up depending on how close/far they are from their prime. 
 
 
-Intended updates:
+
+
+INTENDED UPDATES:
 Salary/Contracts/Salary cap - This will mirror the NFL where each player has a contract with a certain salary and, as the GM, you will need to manage their players and keep the total value of player contracts under the Salary cap. Players will ask for new contracts that reflect their skill level, age, and positional value, routinely.
