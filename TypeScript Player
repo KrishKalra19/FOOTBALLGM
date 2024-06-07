@@ -1,0 +1,188 @@
+const fs = require('fs');
+
+class Player {
+  constructor() {
+    this.name = this.makeName();
+    this.ovr = 59;
+    this.age = 21;
+    this.ran = Math.random;
+
+    if (Math.random() < 0.5) {
+      this.ovr += Math.floor(Math.random() * 10);
+    } else {
+      this.ovr -= Math.floor(Math.random() * 6);
+    }
+
+    this.age += Math.floor(Math.random() * 16);
+    this.checkTrait();
+  }
+
+  makeName() {
+    try {
+      const firstNames = fs.readFileSync('Baby Names.csv', 'utf-8').split('\n');
+      const lastNames = fs.readFileSync('Surnames.csv', 'utf-8').split('\n');
+      const firstName = firstNames[Math.floor(Math.random() * (firstNames.length - 1))];
+      const lastName = lastNames[Math.floor(Math.random() * (lastNames.length - 1))];
+      let name = firstName + ' ' + lastName;
+      name = name.substring(0, firstName.length - 1) + name.substring(firstName.length, name.length - 1);
+      return name;
+    } catch (e) {
+      return 'ERROR';
+    }
+  }
+
+  checkTrait() {
+    if (this.age < 25) {
+      this.developmentTrait = 0;
+    } else if (this.age < 30) {
+      this.developmentTrait = 1;
+    } else if (this.age < 33) {
+      this.developmentTrait = 2;
+    } else if (this.age < 36) {
+      this.developmentTrait = 3;
+    } else {
+      this.developmentTrait = 4;
+    }
+  }
+
+  getOvr() {
+    return this.ovr;
+  }
+
+  getName() {
+    return this.name;
+  }
+
+  getAge() {
+    return this.age;
+  }
+
+  newContract(d) {
+    let ovrMult = 0;
+    if (this.ovr < 65) {
+      ovrMult += 25;
+    } else if (this.ovr < 70) {
+      ovrMult += 35;
+    } else if (this.ovr < 76) {
+      ovrMult += 50;
+    } else if (this.ovr < 83) {
+      ovrMult += 68;
+    } else if (this.ovr < 91) {
+      ovrMult += 85;
+    } else {
+      ovrMult += 100;
+    }
+
+    ovrMult /= 100.0;
+
+    if (this.developmentTrait === 0) {
+      this.salary = Math.floor((d * 9) * ovrMult) + 1;
+    } else if (this.developmentTrait === 1) {
+      this.salary = Math.floor((d * 50) * ovrMult);
+    } else if (this.developmentTrait === 2) {
+      this.salary = Math.floor((d * 48) * ovrMult);
+    } else if (this.developmentTrait === 3) {
+      this.salary = Math.floor((d * 45) * ovrMult);
+    } else {
+      this.salary = Math.floor((d * 40) * ovrMult);
+    }
+  }
+
+  getSalary() {
+    return this.salary;
+  }
+
+  setOvr(i) {
+    this.ovr = i;
+    if (this.ovr > 99) {
+      this.ovr = 99;
+    }
+  }
+
+  setAge(i) {
+    this.age = i;
+  }
+
+  aging() {
+    this.age++;
+    this.checkTrait();
+    this.development();
+  }
+
+  development() {
+    this.ovrC = this.ovr;
+    if (this.developmentTrait === 0) {
+      this.ovr++;
+      if (Math.random() < 0.5) {
+        this.ovr++;
+      }
+      if (Math.random() < 0.25) {
+        this.ovr++;
+      }
+    } else if (this.developmentTrait === 1) {
+      this.ovr++;
+      if (Math.random() < 0.25) {
+        this.ovr++;
+      }
+    } else if (this.developmentTrait === 2) {
+      if (Math.random() < 0.25) {
+        this.ovr--;
+      } else if (Math.random() < 0.5) {
+        this.ovr++;
+      }
+    } else if (this.developmentTrait === 3) {
+      if (Math.random() < 0.5) {
+        this.ovr--;
+      }
+      this.ovr--;
+    } else if (this.developmentTrait === 4) {
+      if (Math.random() < 0.5) {
+        this.ovr--;
+      }
+      if (Math.random() < 0.5) {
+        this.ovr--;
+      }
+      this.ovr--;
+      this.ovr--;
+      this.ovr--;
+    }
+  }
+
+  devStr() {
+    let strOVRCH;
+    if (this.ovrC - this.ovr === 0) {
+      strOVRCH = '+' + this.ovrC;
+    } else if (this.ovrC - this.ovr < 0) {
+      this.ovrC = (this.ovrC - this.ovr) * -1;
+      strOVRCH = '+' + this.ovrC;
+    } else {
+      this.ovrC = (this.ovrC - this.ovr) * -1;
+      strOVRCH = '' + this.ovrC;
+    }
+    if (this.ovrC > 3) {
+      return '';
+    }
+    return ' (' + strOVRCH + ')';
+  }
+
+  toString() {
+    let antiName = '';
+    for (let i = (20 - this.name.length); i > 0; i--) {
+      antiName += ' ';
+    }
+    return `${this.name}${antiName}${this.age}y/o  ${this.ovr} ovr    Salary: $${this.salary} million`;
+  }
+
+  toString2() {
+    let antiName = '';
+    for (let i = (20 - this.name.length); i > 0; i--) {
+      antiName += ' ';
+    }
+    if (this.ovrC !== 0) {
+      return `${this.name}${antiName}${this.age}y/o  ${this.ovrC} ovr    Salary: $${this.salary} million`;
+    } else {
+      return `${this.name}${antiName}${this.age}y/o  ${this.ovr} ovr    Salary: $${this.salary} million`;
+    }
+  }
+}
+
