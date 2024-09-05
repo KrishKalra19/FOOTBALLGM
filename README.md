@@ -18,6 +18,3 @@ v1.2:
 
 
 
-INTENDED UPDATES:
-
-Salary/Contracts/Salary cap - This will mirror the NFL where each player has a contract with a certain salary and, as the GM, you will need to manage their players and keep the total value of player contracts under the Salary cap. Players will ask for new contracts that reflect their skill level, age, and positional value, routinely.
