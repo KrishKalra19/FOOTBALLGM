@@ -1,7 +1,4 @@
-import java.util.Random;
 import java.util.ArrayList;
-import java.util.List;
-import java.io.*;
 import java.util.Scanner;
 
 class Main {
@@ -26,21 +23,32 @@ class Main {
       System.out.println("\nYou are about to become the General Manager of a television-themed football theme. As the GM, you will manage the roster.");
       team1.time();
       team1.lessTime();
-      System.out.println("\nThis roster includes 3 offensive positions (QB, RB, WR) and 3 defensive positions (EDGE, LB, CB). Each player has an ovr (skill rating) that contributes to their side's ovr and the team ovr. The QB and EDGE positions are weighted slighly heavier in their respective sides. Younger players tend to improve in ovr while older players tend to regress in ovr"); 
+      System.out.println(
+              "\nThis roster includes 3 offensive positions (QB, RB, WR) and 3 defensive positions (EDGE, LB, CB). " +
+              "\nEach player has an ovr (skill rating) that contributes to their side's ovr and the team ovr.");
+      team1.time();
+      team1.time();
+      System.out.println(
+              "\nBoth sides are equally important to your team's performance but different positions are weighted differently. " +
+              "\nFrom most important to least important, the positions are as follows: QB, EDGE, CB, WR/LB, RB. Younger players tend to improve in ovr while older players tend to regress in ovr");
+      team1.time();
       team1.time();
       team1.time();
       team1.lessTime();
-      System.out.println("\nYou will also simulate games and seasons. The goal is to win as many superbowls as possible during your tenure as GM. After each season, there will be a draft and a free agency period. These events are opportunities to improve your team and set yourself up to win more in the following season. At the end of your session, you will get an overview of each season and your notable statistics, have fun!");
+      System.out.println(
+              "\nYou will also simulate games and seasons. The goal is to win as many Superbowls as possible during your tenure as GM. " +
+              "\nAfter each season, there will be a draft and a free agency period. These events are opportunities to improve your team and set yourself up to win more in the following season. " +
+              "\nAt the end of your session, you will get an overview of each season and your notable statistics, have fun!");
       team1.time();
       team1.time();
       team1.lessTime();
       System.out.println("\nHope that helped! Type \"play\" to get started:");
-    
+
 
     while (!user.next().equals("play")) {
       System.out.println("Type \"play\" to get started:");
     }
-      
+
     }
 
     go = true;
@@ -64,7 +72,7 @@ class Main {
           System.out.println(s);
         }
         System.out.println("\n" + team1.sessionNotables());
-        System.out.print("\n\nThanks for playing!\nCredits:\nDeveloper: Krish\nSpecial Thanks to Jackson for helping w/ player naming");
+        System.out.print("\n\nThanks for playing!\nCredits:\nDeveloper: Krish");
         go = false;
       }
       if (go) {

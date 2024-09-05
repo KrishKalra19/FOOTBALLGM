@@ -1,9 +1,8 @@
-import java.util.Random;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.*;
+import java.util.Random;
 import java.util.Scanner;
-import java.lang.Math.*;
 
 public class Player {
 
@@ -11,42 +10,48 @@ public class Player {
   private int ovr;
   private int age;
   private int ovrC;
-  private String developmentTrait;
+  private int developmentTrait;
+
+  private int salary;
+  private Random ran = new Random();
+
 
   public Player() {
-    // name = "";
-    ovr = 59;
-    age = 21;
-
-    if (Math.random() < .5) {
-      ovr += (int) (Math.random() * 12);
-    } else {
-      ovr -= (int) (Math.random() * 6);
-    }
-
-    age += (int) (Math.random() * 16);
-
-    if (age < 25) {
-      developmentTrait = "young";
-    } else if (age < 31) {
-      developmentTrait = "prime";
-    } else if (age < 34) {
-      developmentTrait = "maintain";
-    } else {
-      developmentTrait = "washed";
-    }
-
+    //makes name for player
     try {
       name = makeName();
     } catch (Exception e) {
       this.name = "ERROR";
     }
+
+    // initial stats
+    ovr = 59;
+    age = 21;
+
+
+
+    //some variability in ovrs
+    if (Math.random() < .5) {
+      ovr += ran.nextInt(10);
+    } else {
+      ovr -= ran.nextInt(6);
+    }
+
+    //some variability in age
+    age += ran.nextInt(16);
+
+    checkTrait();
+
+
   }
 
-  public String makeName() throws Exception {
-    Random rand = new Random();
 
-    Scanner nameSc = new Scanner(new File("Baby Names.csv"));
+  @edu.umd.cs.findbugs.annotations.SuppressFBWarnings("DM_DEFAULT_ENCODING")
+  public String makeName() throws Exception {
+    ;
+
+    Scanner nameSc = new Scanner(new File("Baby_Names.csv"));
+
     nameSc.useDelimiter("\n");
     List<String> firstNames = new ArrayList<String>();
     while (nameSc.hasNextLine()) {
@@ -61,9 +66,9 @@ public class Player {
       lastNames.add(name);
     }
     nameSc.close();
-    String firstName = firstNames.get(rand.nextInt(firstNames.size() - 1));
+    String firstName = firstNames.get(ran.nextInt(firstNames.size() - 1));
 
-    name = firstName + " " + lastNames.get(rand.nextInt(lastNames.size() - 1));
+    name = firstName + " " + lastNames.get(ran.nextInt(lastNames.size() - 1));
 
      name = name.substring(0,firstName.length() - 1) +
      name.substring(firstName.length(), name.length() - 1);
@@ -72,17 +77,25 @@ public class Player {
   }
 
   public void checkTrait() {
+    //if young
     if (age < 25) {
-      developmentTrait = "young";
-    } else if (age < 30) {
-      developmentTrait = "prime";
-    } else if (age < 33) {
-      developmentTrait = "maintain";
-    } else if (age < 36) {
-      developmentTrait = "washed";
+      developmentTrait = 0;
     }
+    //if in prime
+    else if (age < 30) {
+      developmentTrait = 1;
+    }
+    //if in maintain
+    else if (age < 33) {
+      developmentTrait = 2;
+    }
+    //if old
+    else if (age < 36) {
+      developmentTrait = 3;
+    }
+    //if really old
     else {
-      developmentTrait = "rlywashed";
+      developmentTrait = 4;
     }
   }
 
@@ -98,6 +111,57 @@ public class Player {
     return age;
   }
 
+  public void newContract(double d) {
+
+    double ovrMult = 0;
+    if (ovr < 65) {
+      ovrMult += 25;
+    }
+    else if (ovr < 70) {
+      ovrMult += 35;
+    }
+    else if (ovr < 76) {
+      ovrMult += 50;
+    }
+    else if (ovr < 83) {
+      ovrMult += 68;
+    }
+    else if (ovr < 91) {
+      ovrMult += 85;
+    }
+    else{
+      ovrMult += 100;
+    }
+
+    ovrMult /= 100.0;
+
+
+
+
+    if (developmentTrait == 0) {
+      salary = (int) ((d * 9) * (ovrMult));
+      salary++;
+    }
+    else if (developmentTrait == 1) {
+      salary = (int) ((d * 50) * ovrMult);
+    }
+    else if (developmentTrait == 2) {
+      salary = (int) ((d * 48) * ovrMult);
+    }
+    else if (developmentTrait == 3) {
+      salary = (int) ((d * 45) * ovrMult);
+    }
+    else {
+      salary = (int) ((d * 40) * ovrMult);
+    }
+
+
+  }
+
+  public int getSalary() {
+    return salary;
+  }
+
   public void setOvr(int i) {
     ovr = i;
     if (ovr > 99) {
@@ -109,6 +173,7 @@ public class Player {
     age = i;
   }
 
+
   public void aging() {
     age++;
     checkTrait();
@@ -117,7 +182,7 @@ public class Player {
 
   public void development() {
   ovrC = ovr;
-    if (developmentTrait.equals("young")) {
+    if (developmentTrait == 0) {
       ovr++;
       if (Math.random() < .5) {
         ovr++;
@@ -125,31 +190,31 @@ public class Player {
       if (Math.random() < .25) {
         ovr++;
       }
-    
+
     }
-    else if (developmentTrait.equals("prime")) {
+    else if (developmentTrait == 1) {
       ovr++;
       if (Math.random() < .25) {
         ovr++;
       }
-      
+
     }
-    else if (developmentTrait.equals("maintain")) {
+    else if (developmentTrait == 2) {
       if (Math.random() < .25) {
         ovr--;
       }
       else if (Math.random() < .5) {
         ovr++;
       }
-      return;
+
     }
-    else if (developmentTrait.equals("washed")) {
+    else if (developmentTrait == 3) {
       if (Math.random() < .5) {
         ovr--;
       }
       ovr--;
     }
-    else if (developmentTrait.equals("rlywashed")) {
+    else if (developmentTrait == 4) {
       if (Math.random() < .5) {
         ovr--;
       }
@@ -163,9 +228,9 @@ public class Player {
   }
 
   public String devStr() {
-    String strOVRCH = "";
+    String strOVRCH;
     if (ovrC - ovr == 0) {
-      ovrC = (ovrC - ovr) * -1;
+
       strOVRCH = "+" + ovrC;
     }
     else if (ovrC - ovr < 0) {
@@ -189,8 +254,8 @@ public class Player {
       antiName += " ";
     }
 
-    
-    return (name + antiName + age + "y/o  " + ovr + " ovr" );
+
+    return (name + antiName + age + "y/o  " + ovr + " ovr"  + "    Salary: $" + salary + " million");
   }
 
   public String toString2() {
@@ -201,13 +266,13 @@ public class Player {
     }
 
     if (ovrC != 0) {
-    return (name + antiName + age + "y/o  " + ovrC + " ovr" );
+    return (name + antiName + age + "y/o  " + ovrC + " ovr" + "    Salary: $" + salary + " million");
     }
     else {
-      return (name + antiName + age + "y/o  " + ovr + " ovr" );
+      return (name + antiName + age + "y/o  " + ovr + " ovr" + "    Salary: $" + salary + " million");
     }
   }
 
-  
+
 
 }
