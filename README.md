@@ -1,4 +1,4 @@
- # Krish's Football-GM-v1.2 
+** # Krish's Football-GM-v1.2 **
 This is a text-based game where you act as the general manager (GM) of an American football team. This game is similar to MADDEN, specifically the Franchise mode. 
 
 You will be given a roster of 3 offensive players, a Quarterback (QB), Runningback (RB), Wide Receiver (WR), and 3 defensive players, an Edge Rusher (EDGE), Line-backer (LB), and Cornerback (CB).
@@ -12,7 +12,7 @@ The goal of the game is to win the Super Bowl, which in American football occurs
 When you are done playing at the end of a season, type "STOP" and you will see a small credits paragraph as well as a table showing your results, season by season. The table will also have some session-long results at the end, including total wins and losses, playoff appearances, Super Bowl wins, and more.
 
 
-CHANGELOG:
+**CHANGELOG**:
 
 v1.0 (6/15/23): Initial launch
 
