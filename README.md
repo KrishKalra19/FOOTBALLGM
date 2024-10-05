@@ -7,12 +7,12 @@ When you are done playing at the end of a season, type "STOP" and you will see a
 
 CHANGELOG:
 
-v1.0: Initial launch
+v1.0 (6/15/23): Initial launch
 
-v1.1: 
+v1.1 (10/15/23): 
 -Added player aging and developing, made it so that as players age to their prime, they increase a random amount of ovr. After their prime and as they get older, they lose a random amount of ovr. These amounts ramp up depending on how close/far they are from their prime. 
 
-v1.2: 
+v1.2 (1/30/24): 
 -Added contracts and salary cap. Users now have to manage their players' salaries to ensure they stay under the salary cap. Players will also request new contracts every four seasons, with salaries corresponding to their overall, age, and position. 
 -Changed Regular Season and Playoff schedule to better reflect the NFL (user's team plays teams in its division twice and plays teams in the conference in the playoff before playing the Superbowl against a team in the opposing conference).
 
