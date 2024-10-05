@@ -1,4 +1,4 @@
-** # Krish's Football-GM-v1.2 **
+# Krish's Football-GM-v1.2
 This is a text-based game where you act as the general manager (GM) of an American football team. This game is similar to MADDEN, specifically the Franchise mode. 
 
 You will be given a roster of 3 offensive players, a Quarterback (QB), Runningback (RB), Wide Receiver (WR), and 3 defensive players, an Edge Rusher (EDGE), Line-backer (LB), and Cornerback (CB).
